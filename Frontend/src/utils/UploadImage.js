@@ -8,6 +8,9 @@ const UploadImage = async (image) => {
     const res = await Axios({
       ...SummaryApi.uploadImage,
       data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     return res;
   } catch (error) {

@@ -8,6 +8,11 @@ cloudinary.config({
 
 const uploadImageCloudinary = async (image) => {
   const buffer = image?.buffer || Buffer.from(await image.arrayBuffer());
+  // if (!image || !image.buffer) {
+  //   throw new Error("No image buffer received");
+  // }
+
+  // const buffer = image.buffer;
 
   const uploadImage = await new Promise((resolve, reject) => {
     cloudinary.uploader.upload_stream(
