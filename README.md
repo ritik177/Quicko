@@ -152,3 +152,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Stripe](https://stripe.com/) for payment processing
 - [Tailwind CSS](https://tailwindcss.com/) for styling
 - [React Icons](https://react-icons.github.io/react-icons/) for icons 
+
+Love ❤️ this Repo 
