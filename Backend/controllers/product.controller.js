@@ -1,4 +1,5 @@
 import ProductModel from "../models/product.model.js";
+import mongoose from "mongoose";
 
 export const createProductController = async (req, res) => {
   try {
@@ -238,17 +239,26 @@ export const updateProductDetails = async (req, res) => {
 
 export const deleteProductAdmin = async (req, res) => {
   try {
-    const _id = req.body;
-    if (!_id) {
+    const { _id } = req.body;
+    if (!_id || !mongoose.isValidObjectId(_id)) {
       return res.status(400).json({
-        message: "Provide product _id",
+        message: "Provide a valid product _id",
         success: false,
         error: true,
       });
     }
+
     const deleteProduct = await ProductModel.deleteOne({ _id: _id });
+    if (deleteProduct.deletedCount === 0) {
+      return res.status(404).json({
+        message: "Product not found",
+        error: true,
+        success: false,
+      });
+    }
+
     return res.json({
-      message: "Delete successfully",
+      message: "Product deleted successfully",
       error: false,
       success: true,
       data: deleteProduct,
