@@ -109,7 +109,7 @@ export const deleteSubCategoryContreoller = async (req, res) => {
       message: "Sub Category Deleted",
     });
   } catch (error) {
-    return req.status(500).json({
+    return res.status(500).json({
       message: error.message || error,
       error: true,
       success: false,
