@@ -1,10 +1,8 @@
-import React from "react";
-import banner from "../assets/banner.jpg";
-import bannerMobile from "../assets/banner-mobile.jpg";
 import { useSelector } from "react-redux";
 import { validUrl } from "../utils/ValidURL";
 import { useNavigate } from "react-router-dom";
 import CategoryWiseDisplay from "../components/CategoryWiseDisplay";
+import AdvertisementCarousel from "../components/home/AdvertisementCarousel";
 
 const Home = () => {
   const loadingCategory = useSelector((state) => state.product.loadingCategory);
@@ -25,24 +23,7 @@ const Home = () => {
   };
   return (
     <section className="bg-white">
-      <div className="container mx-auto">
-        <div
-          className={`w-full h-full min-h-48 rounded ${
-            !banner && "animate-pulse my-2"
-          } `}
-        >
-          <img
-            src={banner}
-            alt="banner"
-            className="w-full h-full hidden lg:block"
-          />
-          <img
-            src={bannerMobile}
-            alt="banner"
-            className="w-full h-full lg:hidden"
-          />
-        </div>
-      </div>
+      <AdvertisementCarousel />
       <div className=" container mx-auto px-4 my-2 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-10 gap-2">
         {loadingCategory
           ? new Array(20).fill(null).map((c, index) => {
@@ -56,10 +37,10 @@ const Home = () => {
                 </div>
               );
             })
-          : categoryData.map((cat, index) => {
-              return (
-                <div
-                  key={cat + index}
+          : categoryData.map((cat) => {
+            return (
+              <div
+                key={cat._id}
                   className="w-full h-full"
                   onClick={() =>
                     handleRedirectProductListPage(cat._id, cat.name)
@@ -77,7 +58,7 @@ const Home = () => {
             })}
       </div>
       {/* Display Category wise products  */}
-      {categoryData.slice(0, 6).map((cat, index) => {
+      {categoryData.slice(0, 6).map((cat) => {
         return (
           <CategoryWiseDisplay key={cat._id} id={cat._id} name={cat.name} />
         );
